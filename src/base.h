@@ -82,6 +82,7 @@ static const int TEXTUREBOTTOM_PROP = 33;
 static const int CLIPRECT_PROP = 34;
 static const int AUTOREVERSE = 35;
 static const int DIMENSION = 36;
+static const int LINE_WIDTH = 37;
 
 using namespace v8;
 
@@ -363,6 +364,7 @@ public:
     std::vector<float>* geometry;
     int dimension;
     int filled;
+    float lineWidth;
 
     PolyNode() {
         r = 0; g = 1; b = 0;
@@ -377,6 +379,7 @@ public:
         opacity = 1;
         type = POLY;
         dimension = 2;
+        lineWidth = 1;
     }
     virtual ~PolyNode() {
     }
@@ -507,6 +510,9 @@ public:
             }
             if(property == DIMENSION) {
                 polynode->dimension = value;
+            }
+            if(property == LINE_WIDTH) {
+                polynode->lineWidth = value;
             }
             if(property == FILLED) {
                 polynode->filled = value;

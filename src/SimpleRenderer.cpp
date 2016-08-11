@@ -183,6 +183,12 @@ void SimpleRenderer::drawPoly(GLContext* ctx, PolyNode* poly) {
         colors[i][2] = poly->b;
     }
 
+    GLfloat lineWidth;
+    glGetFloatv(GL_LINE_WIDTH, &lineWidth);
+    if (poly->lineWidth != lineWidth) {
+        glLineWidth(poly->lineWidth);
+    }
+
     ctx->useProgram(colorShader->prog);
     glUniformMatrix4fv(colorShader->u_matrix, 1, GL_FALSE, modelView);
     glUniformMatrix4fv(colorShader->u_trans,  1, GL_FALSE, ctx->globaltx);
@@ -207,6 +213,10 @@ void SimpleRenderer::drawPoly(GLContext* ctx, PolyNode* poly) {
         glDrawArrays(GL_TRIANGLE_FAN, 0, len/dim);
     } else {
         glDrawArrays(GL_LINE_LOOP, 0, len/dim);
+    }
+
+    if (poly->lineWidth) {
+        glLineWidth(lineWidth);
     }
 
     glDisableVertexAttribArray(colorShader->attr_pos);

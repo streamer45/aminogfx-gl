@@ -78,6 +78,7 @@ var propsHash = {
     "h":11,
     "x":21,
     "y":22,
+    "lineWidth": 37,
 
     //transforms  (use x and y for translate in X and Y)
     "sx":2,
